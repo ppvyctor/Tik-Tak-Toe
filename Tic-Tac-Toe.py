@@ -285,6 +285,8 @@ print("\t |   BEM VINDO AO JOGO DA VELHA   |")
 print("\t +--------------------------------+\n")
 #print("\t\t\t  ᗜˬᗜ Bom Jogo ᗜˬᗜ")
 
+#aleaori
+
 for x in matriz:
         print("\t\t    ", end = "")
         for i in range(3):

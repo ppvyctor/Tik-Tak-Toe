@@ -1,2 +1,2 @@
 # Tik-Tak-Toe
-Este arquivo contem o jogo da velha (ou Tik-Tak-Toe como também é conhecido). Este projeto tem como objetivo, criar um jogo da velha totalmente programado em python podendo ser jogado multiplayer ou com uma IA, sendo possível jogar no modo fácil, médio ou impossível.
+Este arquivo contém o jogo da velha (ou Tic-Tac-Toe, como também é conhecido). O objetivo deste projeto é criar um jogo da velha totalmente programado em Python, permitindo jogar multiplayer ou contra uma IA. A IA oferece diferentes níveis de dificuldade, como fácil, médio ou impossível.

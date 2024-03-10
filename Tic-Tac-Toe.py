@@ -63,47 +63,8 @@ def verificador_empate(matriz: list):
         for i in range(len(matriz)):
                 for j in range(len(matriz[i])):
                         if(matriz[i][j] not in ["X", "O"]): identificador += 1
-        if(identificador == 0): 
-                return True
-        else:
-                return False
-
-#caso não haja alteração, retornar a mesma matriz recebida como parâmetro
-#e no if do proprograma colocar se a matriz alterada é igual a anterior
-'''
-def vitoria_Com_uma_jogada(matriz: list):
-        matriz_aux = copy.deepcopy(matriz)
-        lista_espaco_disponivel = []
-        for y in matriz_aux:
-                for i in y:
-                        if(i != 'X' and i != 'O'): lista_espaco_disponivel.append(i)
-        for y in lista_espaco_disponivel:
-                for i in matriz_aux:
-                        for z in range(3):
-                                if(i[z] == y): i[z] = "O"
-                if(Verificador_tabuleiro(matriz_aux)): return matriz_aux
-                matriz_aux = copy.deepcopy(matriz)
-        return matriz
-
-def derrota_Com_uma_jogada(matriz: list):
-        matriz_aux = copy.deepcopy(matriz)
-        lista_espaco_disponivel = []
-        for y in matriz_aux:
-                for i in y:
-                        if(i != 'X' and i != 'O'): lista_espaco_disponivel.append(i)
-        for y in lista_espaco_disponivel:
-                for i in matriz_aux:
-                        for z in range(3):
-                                if(i[z] == y): i[z] = "X"
-                if(Verificador_tabuleiro(matriz_aux)): 
-                        matriz_aux = copy.deepcopy(matriz)
-                        for i in matriz_aux:
-                                for z in range(3):
-                                        if(i[z] == y): i[z] = "O"
-                        return matriz_aux
-                matriz_aux = copy.deepcopy(matriz)
-        return matriz
-'''
+        if(identificador == 0): return True
+        return False
 
 def jogada_maliciosa(matriz: list, identificador = 0):
         if(identificador == 0):
@@ -207,7 +168,6 @@ def jogada_IA(matriz: list):
                 for x in range(3):
                         for i in range(3):
                                 if(matriz_aux[x][i] != matriz[x][i]): return matriz_aux
-        #probabilidade_derrota_aux = 0
         for linha in range(3):
                 for coluna in range(3):
                         if(matriz[linha][coluna] != 'X' and matriz[linha][coluna] != 'O'):
@@ -252,9 +212,7 @@ def jogada_IA(matriz: list):
                                                 identificador += 1
                                 probabilidade_vitoria = len(qtd_vitorias)/eventos
                                 probabilidade_empates = len(qtd_empates)/eventos
-                                '''print(f"Vitória {linha}, {coluna}: {probabilidade_vitoria}")
-                                print(f"Empate {linha}, {coluna}: {probabilidade_empates}")
-                                os.system("pause")'''
+                                
                                 if(probabilidade_vitoria == 1):
                                         if(Verificador_tabuleiro(primeira_pos)):
                                                 best_chance_victory = probabilidade_vitoria
@@ -283,8 +241,6 @@ matriz = [[7, 8, 9],
 print("\t +--------------------------------+")
 print("\t |   BEM VINDO AO JOGO DA VELHA   |")
 print("\t +--------------------------------+\n")
-#print("\t\t\t  ᗜˬᗜ Bom Jogo ᗜˬᗜ")
-
 
 for x in matriz:
         print("\t\t    ", end = "")
@@ -322,9 +278,11 @@ while(True):
                 print("\t3) Sair do jogo.\n")
                 try:
                         opcao = int(input("\nDigite o numero da opção desejada: "))
+                        
                         if(opcao <= 0 or opcao > 3):
                                 print("\n\nOOOPS!!! Digite um número entre 1 e 3")
                                 os.system("pause")
+
                         elif(opcao == 1):
                                 os.system("cls")
                                 if(username == ''):
@@ -365,11 +323,23 @@ while(True):
                         print("\n\nOOOOPS!!! Digitação errada, por favor digite um número inteira.")
                         os.system("pause")
         if(opcao == 1):
+                lista_rodadas = []
                 while(True):
                         matriz = [[7, 8, 9],
                         [4, 5, 6],
                         [1, 2, 3]]
                         identificador_comeca = random.randint(0,1)
+                        lista_rodadas.append(identificador_comeca)
+                        
+                        if(len(lista_rodadas) >= 3):
+                                if(len(lista_rodadas) > 3): lista_rodadas.pop(0)
+                                
+                                if(lista_rodadas[0] == lista_rodadas[1] and lista_rodadas[0] == lista_rodadas[2]) and lista_rodadas[1] == lista_rodadas[2]: 
+                                        if lista_rodadas[0] == 0:
+                                                identificador_comeca = 1
+                                        else:
+                                                identificador_comeca = 0
+                        
                         while (True):
                                 os.system("cls")
                                 if(Verificador_tabuleiro(matriz)): break
@@ -462,11 +432,23 @@ while(True):
                         if(opcao == 'N'):
                                 break
         elif(opcao == 2):
+                lista_rodadas = []
                 while(True):
                         matriz = [[7, 8, 9],
                         [4, 5, 6],
                         [1, 2, 3]]
                         identificador_comeca = random.randint(0,1)
+                        lista_rodadas.append(identificador_comeca)
+                        
+                        if(len(lista_rodadas) >= 3):
+                                if(len(lista_rodadas) > 3): lista_rodadas.pop(0)
+                                
+                                if(lista_rodadas[0] == lista_rodadas[1] and lista_rodadas[0] == lista_rodadas[2]) and lista_rodadas[1] == lista_rodadas[2]: 
+                                        if lista_rodadas[0] == 0:
+                                                identificador_comeca = 1
+                                        else:
+                                                identificador_comeca = 0
+
                         while (True):
                                 os.system("cls")
                                 if(Verificador_tabuleiro(matriz)): break

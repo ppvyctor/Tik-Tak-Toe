@@ -157,23 +157,7 @@ def jogada_IA(matriz: list, nivel):
         eventos = 5000 
         best_chance_victory = 0
         
-        if nivel == 1:
-                pos = []
-                aux = copy.deepcopy(matriz)
-                for x in range(len(matriz)):
-                        for y in range(len(matriz[x])):
-                                if matriz[x][y] != "X" and matriz[x][y] != "O": 
-                                        aux[x][y] = "O"
-                                        pos.append([x,y])
-                                        if(Verificador_tabuleiro(aux)):
-                                                return aux
-                                        else:
-                                                aux[x][y] = matriz[x][y]
-                escolha = random.choice(pos)
-                matriz[escolha[0]][escolha[1]] = "O"
-                return matriz
-        
-        elif(nivel == 3):
+        if(nivel == 3):
                 if(jogada_maliciosa(matriz)):
                         y = random.choice([2, 4, 6, 8])
                         matriz_aux = copy.deepcopy(matriz) 
@@ -186,6 +170,36 @@ def jogada_IA(matriz: list, nivel):
                         for x in range(3):
                                 for i in range(3):
                                         if(matriz_aux[x][i] != matriz[x][i]): return matriz_aux
+                                        
+        else:
+                pos = []
+                aux = copy.deepcopy(matriz)
+                for x in range(len(matriz)):
+                        for y in range(len(matriz[x])):
+                                if matriz[x][y] != "X" and matriz[x][y] != "O": 
+                                        aux[x][y] = "O"
+                                        pos.append([x,y])
+                                        if(Verificador_tabuleiro(aux)):
+                                                return aux
+                                        else:
+                                                aux[x][y] = matriz[x][y]
+                
+                if nivel == 2:
+                        for x in range(len(matriz)):
+                                for y in range(len(matriz[x])):
+                                        if matriz[x][y] != "X" and matriz[x][y] != "O": 
+                                                aux[x][y] = "X"
+                                                
+                                                if(Verificador_tabuleiro(aux)): 
+                                                        aux[x][y] = "O"
+                                                        return aux
+                                                
+                                                aux[x][y] = matriz[x][y]
+                                       
+                escolha = random.choice(pos)
+                matriz[escolha[0]][escolha[1]] = "O"
+                return matriz
+        
         for linha in range(3):
                 for coluna in range(3):
                         if(matriz[linha][coluna] != 'X' and matriz[linha][coluna] != 'O'):
@@ -309,8 +323,8 @@ while(True):
                                         username = input("Digite um username: ")
                                         if((username == '' or username == ' ') or username == '  '): username = "Player"
                                 else:
-                                        opcao_nome = input('Digite qualquer coisa diferente de "s ou S" para digitar um outro nome: ').upper()
-                                        if(opcao != 'S'):
+                                        opcao_nome = input('Digite "s ou S" para mudar o username, caso contrário pressione qualquer botão: ').upper()
+                                        if(opcao_nome == 'S'):
                                                 username = input("\n\nDigite um username: ")
                                                 if((username == '' or username == ' ') or username == '  '): username = "Player 1"
                                 break
@@ -320,18 +334,18 @@ while(True):
                                         player_1 = input("Digite um username para o player 1: ")
                                         if((player_1 == '' or player_1 == ' ') or player_1 == '  '): player_1 = "Player 1"
                                 else:
-                                        opcao_nome = input('Digite qualquer coisa diferente de "s ou S" para digitar um outro nome: ').upper()
-                                        if(opcao_nome != 'S'):
-                                                player_1 = input("\n\nDigite um username para o player 1: ")
+                                        opcao_nome = input('Digite "s ou S" para mudar o nome do Player 1, caso contrário pressione qualquer botão: ').upper()
+                                        if(opcao_nome == 'S'):
+                                                player_1 = input("\n\nDigite um username para o Player 1: ")
                                                 if((username == '' or player_1 == ' ') or player_1 == '  '): player_1 = "Player 1"
                                 os.system("cls")
                                 if(player_2 == ''):
                                         player_2 = input("Digite um username para o player 2: ")
                                         if((player_2 == '' or player_2 == ' ') or player_2 == '  '): player_2 = "Player 2"
                                 else:
-                                        opcao_nome = input('Digite qualquer coisa diferente de "s ou S" para digitar um outro nome: ').upper()
-                                        if(opcao_nome != 'S'):
-                                                player_2 = input("\n\nDigite um username para o player 2: ")
+                                        opcao_nome = input('Digite "s ou S" para mudar o nome do Player 2, caso contrário pressione qualquer botão: ').upper()
+                                        if(opcao_nome == 'S'):
+                                                player_2 = input("\n\nDigite um username para o Player 2: ")
                                                 if((player_2 == '' or player_2 == ' ') or player_2 == '  '): player_2 = "Player 2"
                         else:
                                 os.system("cls")

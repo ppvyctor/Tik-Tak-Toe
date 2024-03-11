@@ -156,7 +156,24 @@ def jogada_IA(matriz: list, nivel):
         lista_melhor_pos = []
         eventos = 5000 
         best_chance_victory = 0
-        if(nivel == 3):
+        
+        if nivel == 1:
+                pos = []
+                aux = copy.deepcopy(matriz)
+                for x in range(len(matriz)):
+                        for y in range(len(matriz[x])):
+                                if matriz[x][y] != "X" and matriz[x][y] != "O": 
+                                        aux[x][y] = "O"
+                                        pos.append([x,y])
+                                        if(Verificador_tabuleiro(aux)):
+                                                return aux
+                                        else:
+                                                aux[x][y] = matriz[x][y]
+                escolha = random.choice(pos)
+                matriz[escolha[0]][escolha[1]] = "O"
+                return matriz
+        
+        elif(nivel == 3):
                 if(jogada_maliciosa(matriz)):
                         y = random.choice([2, 4, 6, 8])
                         matriz_aux = copy.deepcopy(matriz) 
@@ -323,7 +340,7 @@ while(True):
                                 os.system("pause")
                                 exit()
                 except ValueError:
-                        print("\n\nOOOOPS!!! Digitação errada, por favor digite um número inteira.")
+                        print("\n\nOOOOPS!!! Digitação errada, por favor digite um número inteiro.")
                         os.system("pause")
         if(opcao == 1):
                 lista_rodadas = []
@@ -397,7 +414,7 @@ while(True):
                                 if(identificador_comeca == 0):
                                         try:
                                                 jogada = int(input("Digite o número da posicao que deseja realiar a jogada: "))
-                                                if(0 <= jogada >9):
+                                                if(0 <= jogada > 9):
                                                         print("\n\nOOOPS!!! Digite um número de 1 a 9 para realiar a jogada")
                                                         os.system("pause")
                                                         continue

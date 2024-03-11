@@ -152,31 +152,33 @@ def jogada_maliciosa(matriz: list, identificador = 0):
                                 
         return False
 
-def jogada_IA(matriz: list):
+def jogada_IA(matriz: list, nivel):
         lista_melhor_pos = []
         eventos = 5000 
         best_chance_victory = 0
-        if(jogada_maliciosa(matriz)):
-                y = random.choice([2, 4, 6, 8])
-                matriz_aux = copy.deepcopy(matriz) 
-                for x in range(3):
-                        for i in range(3):
-                                if(matriz_aux[x][i]== y): matriz_aux[x][i] = 'O'
-                return matriz_aux
-        else:
-                matriz_aux = jogada_maliciosa(matriz, 1)
-                for x in range(3):
-                        for i in range(3):
-                                if(matriz_aux[x][i] != matriz[x][i]): return matriz_aux
+        if(nivel == 3):
+                if(jogada_maliciosa(matriz)):
+                        y = random.choice([2, 4, 6, 8])
+                        matriz_aux = copy.deepcopy(matriz) 
+                        for x in range(3):
+                                for i in range(3):
+                                        if(matriz_aux[x][i]== y): matriz_aux[x][i] = 'O'
+                        return matriz_aux
+                else:
+                        matriz_aux = jogada_maliciosa(matriz, 1)
+                        for x in range(3):
+                                for i in range(3):
+                                        if(matriz_aux[x][i] != matriz[x][i]): return matriz_aux
         for linha in range(3):
                 for coluna in range(3):
                         if(matriz[linha][coluna] != 'X' and matriz[linha][coluna] != 'O'):
                                 qtd_vitorias = []
                                 qtd_empates = []
-                                #qtd_derrota = []
                                 matriz_aux = copy.deepcopy(matriz) 
                                 matriz_aux[linha][coluna] = 'O'
+
                                 if(Verificador_tabuleiro(matriz_aux)): return matriz_aux
+
                                 for i in range(eventos):
                                         matriz_aux = copy.deepcopy(matriz)
                                         matriz_aux[linha][coluna] = 'X'
@@ -201,11 +203,12 @@ def jogada_IA(matriz: list):
                                                                                         vez -= 1
                                                         lista_espaco_disponivel.remove(y)
                                                 if(Verificador_tabuleiro(matriz_aux, 1) == 'O'):
-                                                        #qtd_derrota.append(primeira_pos)
                                                         break
+
                                                 elif(Verificador_tabuleiro(matriz_aux, 1) == 'X'):
                                                         qtd_vitorias.append(primeira_pos)
                                                         break
+
                                                 elif(verificador_empate(matriz_aux)):
                                                         qtd_empates.append(primeira_pos)
                                                 
@@ -413,7 +416,7 @@ while(True):
                                                 os.system("pause")
                                                 continue
                                 else:
-                                        matriz = jogada_IA(matriz)
+                                        matriz = jogada_IA(matriz, nivel)
                                         identificador_comeca -= 1
                                                 
                         os.system("cls")

@@ -324,6 +324,31 @@ while(True):
                         os.system("pause")
         if(opcao == 1):
                 lista_rodadas = []
+                
+                os.system("cls")
+                while (True):
+                        try:
+                                print("Escolha entre os níveis de dificuldade abaixo:")
+                                print("\t1) Easy")
+                                print("\t2) Medium")
+                                print("\t3) Impossible\n")
+                                nivel = int(input("Digite o nível desejado abaixo: "))
+                                
+                                if(nivel > 3): 
+                                        print("\nOOOOOOPS!! Não digite um número de 1 a 3.")
+                                        os.system("pause")
+                                        os.system("clear")
+                                elif(nivel < 1):
+                                        print("\nOOOOOOPS!! Não digite um número de 1 a 3.")
+                                        os.system("pause")
+                                        os.system("clear")
+                                else:
+                                        break
+                        except ValueError:
+                                print("\nOOOOPS!! Digitação errada, por favor escolha um número de 1 a 3 que corresponda com o nível de dificuldade desejada.\n\n")
+                                os.system("pause")
+                                os.system("clear")  
+                
                 while(True):
                         matriz = [[7, 8, 9],
                         [4, 5, 6],
